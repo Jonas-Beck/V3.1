@@ -1,0 +1,31 @@
+.hero-banner {
+    background-image: url(./images/background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 80vw;
+    max-height: 500px;
+}
+.hero-banner > img {
+    top: 0px;
+    left: 0px;
+    z-index: 3;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+}
+
+@media (min-width: 799px) {
+    .hero-banner {
+        background-position: 50% 40%;
+    }
+}
+
+/*Testimonial Slide*/
+.carousel-item > .carousel-caption{
+    left: 0px;
+    right: 0px;
+    bottom: 60px;
+}
+.carousel-indicators{
+    bottom: 40px;
+}
