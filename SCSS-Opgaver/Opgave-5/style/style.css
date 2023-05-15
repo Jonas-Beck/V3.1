@@ -1,0 +1,382 @@
+.kasse-1 {
+  float: left;
+  background-color: #49abe4;
+  width: 31.3333333333%;
+  height: 17.7024482109%;
+}
+.kasse-1:nth-child(n) {
+  margin-bottom: 3%;
+  margin-right: 3%;
+}
+.kasse-1:nth-child(3n) {
+  margin-right: 0px;
+}
+@media only screen and (min-width: 600px) {
+  .kasse-1 {
+    background-color: #49abe4;
+    width: 23.5%;
+    height: 23.5%;
+  }
+  .kasse-1:nth-child(n) {
+    margin-bottom: 2%;
+    margin-right: 2%;
+  }
+  .kasse-1:nth-child(4n) {
+    margin-right: 0px;
+  }
+}
+@media only screen and (min-width: 1000px) {
+  .kasse-1 {
+    background-color: #49abe4;
+    width: 18.4%;
+    height: 32.568%;
+  }
+  .kasse-1:nth-child(n) {
+    margin-bottom: 2%;
+    margin-right: 2%;
+  }
+  .kasse-1:nth-child(5n) {
+    margin-right: 0px;
+  }
+}
+
+.kasse-2 {
+  float: left;
+  background-color: #33a1e1;
+  width: 31.3333333333%;
+  height: 17.7024482109%;
+}
+.kasse-2:nth-child(n) {
+  margin-bottom: 3%;
+  margin-right: 3%;
+}
+.kasse-2:nth-child(3n) {
+  margin-right: 0px;
+}
+@media only screen and (min-width: 600px) {
+  .kasse-2 {
+    background-color: #33a1e1;
+    width: 23.5%;
+    height: 23.5%;
+  }
+  .kasse-2:nth-child(n) {
+    margin-bottom: 2%;
+    margin-right: 2%;
+  }
+  .kasse-2:nth-child(4n) {
+    margin-right: 0px;
+  }
+}
+@media only screen and (min-width: 1000px) {
+  .kasse-2 {
+    background-color: #33a1e1;
+    width: 18.4%;
+    height: 32.568%;
+  }
+  .kasse-2:nth-child(n) {
+    margin-bottom: 2%;
+    margin-right: 2%;
+  }
+  .kasse-2:nth-child(5n) {
+    margin-right: 0px;
+  }
+}
+
+.kasse-3 {
+  float: left;
+  background-color: #2096d9;
+  width: 31.3333333333%;
+  height: 17.7024482109%;
+}
+.kasse-3:nth-child(n) {
+  margin-bottom: 3%;
+  margin-right: 3%;
+}
+.kasse-3:nth-child(3n) {
+  margin-right: 0px;
+}
+@media only screen and (min-width: 600px) {
+  .kasse-3 {
+    background-color: #2096d9;
+    width: 23.5%;
+    height: 23.5%;
+  }
+  .kasse-3:nth-child(n) {
+    margin-bottom: 2%;
+    margin-right: 2%;
+  }
+  .kasse-3:nth-child(4n) {
+    margin-right: 0px;
+  }
+}
+@media only screen and (min-width: 1000px) {
+  .kasse-3 {
+    background-color: #2096d9;
+    width: 18.4%;
+    height: 32.568%;
+  }
+  .kasse-3:nth-child(n) {
+    margin-bottom: 2%;
+    margin-right: 2%;
+  }
+  .kasse-3:nth-child(5n) {
+    margin-right: 0px;
+  }
+}
+
+.kasse-4 {
+  float: left;
+  background-color: #1d86c3;
+  width: 31.3333333333%;
+  height: 17.7024482109%;
+}
+.kasse-4:nth-child(n) {
+  margin-bottom: 3%;
+  margin-right: 3%;
+}
+.kasse-4:nth-child(3n) {
+  margin-right: 0px;
+}
+@media only screen and (min-width: 600px) {
+  .kasse-4 {
+    background-color: #1d86c3;
+    width: 23.5%;
+    height: 23.5%;
+  }
+  .kasse-4:nth-child(n) {
+    margin-bottom: 2%;
+    margin-right: 2%;
+  }
+  .kasse-4:nth-child(4n) {
+    margin-right: 0px;
+  }
+}
+@media only screen and (min-width: 1000px) {
+  .kasse-4 {
+    background-color: #1d86c3;
+    width: 18.4%;
+    height: 32.568%;
+  }
+  .kasse-4:nth-child(n) {
+    margin-bottom: 2%;
+    margin-right: 2%;
+  }
+  .kasse-4:nth-child(5n) {
+    margin-right: 0px;
+  }
+}
+
+.kasse-5 {
+  float: left;
+  background-color: #1a77ad;
+  width: 31.3333333333%;
+  height: 17.7024482109%;
+}
+.kasse-5:nth-child(n) {
+  margin-bottom: 3%;
+  margin-right: 3%;
+}
+.kasse-5:nth-child(3n) {
+  margin-right: 0px;
+}
+@media only screen and (min-width: 600px) {
+  .kasse-5 {
+    background-color: #1a77ad;
+    width: 23.5%;
+    height: 23.5%;
+  }
+  .kasse-5:nth-child(n) {
+    margin-bottom: 2%;
+    margin-right: 2%;
+  }
+  .kasse-5:nth-child(4n) {
+    margin-right: 0px;
+  }
+}
+@media only screen and (min-width: 1000px) {
+  .kasse-5 {
+    background-color: #1a77ad;
+    width: 18.4%;
+    height: 32.568%;
+  }
+  .kasse-5:nth-child(n) {
+    margin-bottom: 2%;
+    margin-right: 2%;
+  }
+  .kasse-5:nth-child(5n) {
+    margin-right: 0px;
+  }
+}
+
+.kasse-6 {
+  float: left;
+  background-color: #176897;
+  width: 31.3333333333%;
+  height: 17.7024482109%;
+}
+.kasse-6:nth-child(n) {
+  margin-bottom: 3%;
+  margin-right: 3%;
+}
+.kasse-6:nth-child(3n) {
+  margin-right: 0px;
+}
+@media only screen and (min-width: 600px) {
+  .kasse-6 {
+    background-color: #176897;
+    width: 23.5%;
+    height: 23.5%;
+  }
+  .kasse-6:nth-child(n) {
+    margin-bottom: 2%;
+    margin-right: 2%;
+  }
+  .kasse-6:nth-child(4n) {
+    margin-right: 0px;
+  }
+}
+@media only screen and (min-width: 1000px) {
+  .kasse-6 {
+    background-color: #176897;
+    width: 18.4%;
+    height: 32.568%;
+  }
+  .kasse-6:nth-child(n) {
+    margin-bottom: 2%;
+    margin-right: 2%;
+  }
+  .kasse-6:nth-child(5n) {
+    margin-right: 0px;
+  }
+}
+
+.kasse-7 {
+  float: left;
+  background-color: #135981;
+  width: 31.3333333333%;
+  height: 17.7024482109%;
+}
+.kasse-7:nth-child(n) {
+  margin-bottom: 3%;
+  margin-right: 3%;
+}
+.kasse-7:nth-child(3n) {
+  margin-right: 0px;
+}
+@media only screen and (min-width: 600px) {
+  .kasse-7 {
+    background-color: #135981;
+    width: 23.5%;
+    height: 23.5%;
+  }
+  .kasse-7:nth-child(n) {
+    margin-bottom: 2%;
+    margin-right: 2%;
+  }
+  .kasse-7:nth-child(4n) {
+    margin-right: 0px;
+  }
+}
+@media only screen and (min-width: 1000px) {
+  .kasse-7 {
+    background-color: #135981;
+    width: 18.4%;
+    height: 32.568%;
+  }
+  .kasse-7:nth-child(n) {
+    margin-bottom: 2%;
+    margin-right: 2%;
+  }
+  .kasse-7:nth-child(5n) {
+    margin-right: 0px;
+  }
+}
+
+.kasse-8 {
+  float: left;
+  background-color: #10496a;
+  width: 31.3333333333%;
+  height: 17.7024482109%;
+}
+.kasse-8:nth-child(n) {
+  margin-bottom: 3%;
+  margin-right: 3%;
+}
+.kasse-8:nth-child(3n) {
+  margin-right: 0px;
+}
+@media only screen and (min-width: 600px) {
+  .kasse-8 {
+    background-color: #10496a;
+    width: 23.5%;
+    height: 23.5%;
+  }
+  .kasse-8:nth-child(n) {
+    margin-bottom: 2%;
+    margin-right: 2%;
+  }
+  .kasse-8:nth-child(4n) {
+    margin-right: 0px;
+  }
+}
+@media only screen and (min-width: 1000px) {
+  .kasse-8 {
+    background-color: #10496a;
+    width: 18.4%;
+    height: 32.568%;
+  }
+  .kasse-8:nth-child(n) {
+    margin-bottom: 2%;
+    margin-right: 2%;
+  }
+  .kasse-8:nth-child(5n) {
+    margin-right: 0px;
+  }
+}
+
+.kasse-9 {
+  float: left;
+  background-color: #0d3a54;
+  width: 31.3333333333%;
+  height: 17.7024482109%;
+}
+.kasse-9:nth-child(n) {
+  margin-bottom: 3%;
+  margin-right: 3%;
+}
+.kasse-9:nth-child(3n) {
+  margin-right: 0px;
+}
+@media only screen and (min-width: 600px) {
+  .kasse-9 {
+    background-color: #0d3a54;
+    width: 23.5%;
+    height: 23.5%;
+  }
+  .kasse-9:nth-child(n) {
+    margin-bottom: 2%;
+    margin-right: 2%;
+  }
+  .kasse-9:nth-child(4n) {
+    margin-right: 0px;
+  }
+}
+@media only screen and (min-width: 1000px) {
+  .kasse-9 {
+    background-color: #0d3a54;
+    width: 18.4%;
+    height: 32.568%;
+  }
+  .kasse-9:nth-child(n) {
+    margin-bottom: 2%;
+    margin-right: 2%;
+  }
+  .kasse-9:nth-child(5n) {
+    margin-right: 0px;
+  }
+}
+
+.kasser {
+  height: 100vh;
+  width: 100%;
+}/*# sourceMappingURL=style.css.map */

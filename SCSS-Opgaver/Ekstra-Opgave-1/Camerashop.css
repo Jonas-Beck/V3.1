@@ -1,0 +1,174 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+body
+{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: hsl(222, 20%, 70%);
+    color: hsl(222, 20%, 100%);
+}
+
+.gridcontainer
+{
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+    "header"
+    "product1"
+    "product2"
+    "product3"
+    "product4"
+    "footer";
+}
+
+header
+{
+    grid-area: header;
+}
+
+.maincolumn1
+{
+    grid-area: product1;
+    padding-top: 3rem;
+}
+
+.maincolumn2
+{
+    grid-area: product2;
+}
+
+.maincolumn3
+{
+    grid-area: product3;
+}
+
+.maincolumn4
+{
+    grid-area: product4;
+}
+
+footer
+{
+    grid-area: footer;
+}
+
+header, footer
+{
+    background-color: hsl(222, 30%, 40%);
+    color: hsla(222, 20%, 100%, 0.6);
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+header h1
+{
+    font-size: 4rem;
+    text-shadow: -2px -2px 5px hsl(222, 70%, 10%);
+}
+
+.product
+{
+    text-align: center;
+    font-size: 2rem;
+    position: relative;
+    z-index: 2;
+    margin-top: -7rem;
+    margin-bottom: 3rem;
+    background-color: hsla(222, 20%, 100%, 0.6);
+}
+
+.maincolumn1 img, .maincolumn2 img, .maincolumn3 img, .maincolumn4 img
+{
+    -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 0 85%);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 0 85%);
+    transition: 4s;
+}
+
+@media only screen and (min-width: 1000px)
+{
+    .gridcontainer
+{
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 100px 1fr 1fr 100px;
+    grid-template-areas:
+    "header header"
+    "product1 product2"
+    "product3 product4"
+    "footer footer";
+}
+
+.maincolumn2
+{
+    padding-top: 3rem;
+}
+
+.maincolumn1, .maincolumn3
+{
+    padding-left: 15vw;
+}
+
+.maincolumn2, .maincolumn4
+{
+    padding-right: 15vw;
+}
+
+
+@media only screen and (min-width: 1500px)
+{
+    .gridcontainer
+    {
+        display: grid;
+        width: 100vw;
+        height: 100vh;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 100px auto 100px;
+        grid-template-areas:
+        "header header header header"
+        "product1 product2 product3 product4"
+        "footer footer footer footer";
+    }
+
+    .product
+    {
+        text-align: center;
+        font-size: 2rem;
+        padding-top: 1rem;
+        opacity: 0;
+        transform: scale(0);
+        margin-top: 0;
+        margin-bottom: 0;
+        background-color: hsla(222, 20%, 100%, 0.0);
+        color: hsl(222, 20%, 30%);
+    }
+
+
+    .maincolumn1 img:hover, .maincolumn2 img:hover, .maincolumn3 img:hover, .maincolumn4 img:hover
+    {
+        -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 70% 85%, 50% 100%, 30% 85%, 0 85%);
+        clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 70% 85%, 50% 100%, 30% 85%, 0 85%);
+        cursor: pointer;
+    }
+
+    img:hover ~ .product
+    {
+        opacity: 1;
+        transform: scale(1);
+        transition: all 0.5s ease-out;
+    }
+
+    .maincolumn1, .maincolumn2, .maincolumn3, .maincolumn4
+    {
+        padding: 0px;
+    }
+}

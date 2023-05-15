@@ -1,0 +1,71 @@
+// Variable
+$blue: hsl(202, 74%, 64%);
+$total: 9;
+
+
+// Mixins
+@mixin box($number, $width, $size){
+    background-color: fancyColor($number);
+    width: $width;
+    @if $size == big{
+        height: $width * 1.77;
+    }
+    @else if $size == medium{
+        height: $width;
+    }
+    @else {
+        height: $width / 1.77;
+    }
+}
+
+@mixin imagegrid ($columns, $margin){
+
+        &:nth-child(n){
+            margin-bottom: $margin;
+            margin-right: $margin;            
+        }
+        &:nth-child(#{$columns}n){
+            margin-right: 0px;
+        }
+    }
+
+// Functions
+@function fancyColor($number){
+    @return darken($blue, 5% * $number);
+}
+
+@function calculateWidth($columns, $margin){
+        @return ((100% - ($margin * ($columns - 1))) / $columns);
+    }
+
+
+
+// Styling
+@for $i from 1 through $total{
+    .kasse-#{$i}{
+
+        float: left;
+
+        @include box($i, calculateWidth(3, 3%), small);
+        @include imagegrid(3, 3%);
+
+        @media only screen and (min-width: 600px) {
+            @include box($i, calculateWidth(4, 2%), medium);
+            @include imagegrid(4, 2%);
+          }
+
+        @media only screen and (min-width: 1000px) {
+            @include box($i, calculateWidth(5, 2%), big);
+            @include imagegrid(5, 2%);
+          }
+    }
+}
+
+
+
+.kasser{
+    height: 100vh;
+    width: 100%;
+}
+
+
