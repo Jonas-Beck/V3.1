@@ -1,0 +1,135 @@
+//Variables
+
+// Colors
+$black: hsl(0, 8%, 5%);
+$yellow: hsl(60, 100%, 60%);
+$grey-text: hsl(0, 0%, 50%);
+$grey-bg: hsl(0, 0%, 83%);
+
+//Font sizes
+$font-sizes: (
+    h1: 36px,
+    h2: 30px,
+    h3: 24px,
+    h4: 18px,
+    a: 14px,
+    p: 14px,
+);
+
+// Mixin
+@mixin media-query($break-point) {
+    @if $break-point == xxl {
+        @media (min-width: 1399px) {
+            @content;
+        }
+    }
+    @if $break-point == xl {
+        @media (min-width: 1199px) {
+            @content;
+        }
+    }
+    @if $break-point == lg {
+        @media (min-width: 991px) {
+            @content;
+        }
+    }
+    @if $break-point == md {
+        @media (min-width: 767px) {
+            @content;
+        }
+    }
+    @if $break-point == sm {
+        @media (min-width: 575px) {
+            @content;
+        }
+    }
+}
+
+
+* {
+    font-family: Helvetica;
+}
+
+@each $tag, $size in $font-sizes {
+    #{$tag} {
+        font-size: $size;
+    }
+}
+
+.navbar {
+    background-color: $yellow;
+    button{
+        margin: 10px 10px;
+    }
+    .container-fluid {
+        flex-wrap: wrap;
+        .brand{
+            flex-basis: 100%;
+            background-color: $black;
+            padding: 15px;
+            text-align: center;
+        }
+        .navbar-brand {
+            flex-basis: 100%;
+        }
+        .nav-link{
+            color: black;
+            padding: 15px;
+            transition: .2s;
+            &:hover{
+                background-color: scale-color($yellow, $lightness: -30%);
+            }
+        }
+    }
+}
+
+//Example 
+@function banner-height(){ //Useless function
+    @return 400px;
+}
+
+.hero-banner {
+    background-image: url(../img/MetaV42.jpg);
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: banner-height();
+}
+
+// Example
+%img-fluid {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+img{ // Useless extend
+    @extend %img-fluid 
+}
+
+.video-section {
+    background-color: $grey-bg;
+    .video-section-img{
+        display: flex;
+        justify-content: center;
+        padding-bottom: 16px;
+    }
+}
+
+footer {
+    background-color: $black;
+    h4 {
+        color: $yellow;
+    }
+    a {
+        text-decoration: none;
+        color: grey;
+        font-size: 1.1rem;
+        transition: 0.2s;
+        &:hover {
+            scale: 1.1;
+        }
+    }
+}
