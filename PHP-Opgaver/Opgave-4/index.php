@@ -6,7 +6,12 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <title>Edea skates</title>
 </head>
-<body>
+<body class="<?php if (date("i") % 2 == 0) {
+                    echo "light";
+                }
+                else {
+                    echo "dark";
+                } ?>">
     <?php 
         include "includes/topmenu.php";
 
@@ -16,7 +21,14 @@
     <div class="content">
 
         <header>
-            <img src="img/edea-home-of-champions.jpg" alt="Edea skates">
+            <img src="img/<?php if (date("m") >= 0 && date("m") <= 6) {
+                    echo "edea-ice-skate-collection-2018.jpg";
+                }
+                else {
+                    echo "edea-home-of-champions.jpg";
+                }?>" alt="Edea skates">
+                
+
         </header>
 
         <main>
