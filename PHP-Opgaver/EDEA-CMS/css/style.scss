@@ -358,7 +358,11 @@ form {
     .logininput {
         width: 250px;
     }
-
+    .loginerror {
+        color: red;
+        font-size: small;
+        padding-left: 10px;
+    }
     .submitbtn {
         width: 100px;
         margin-left: 30%;

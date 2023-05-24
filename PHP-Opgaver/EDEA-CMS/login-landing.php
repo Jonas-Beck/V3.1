@@ -2,7 +2,6 @@
 session_start();
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +9,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <title>Logout</title>
+    <title>Login</title>
 </head>
 <body class="light">
 
@@ -22,9 +21,8 @@ session_start();
 
     <div class="content">
         <main>
-            <h1>Logout</h1>
-
-            <p>Du er nu logget ud!</p>
+            
+            <h1>Du er nu logget ind</h1>
         </main>
 
         <?php include "includes/footer.php"; ?>

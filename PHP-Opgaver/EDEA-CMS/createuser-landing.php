@@ -31,7 +31,6 @@
     }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,28 +50,31 @@
 
     <div class="content">
         <main>
-        <h1>Login</h1>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">  <!-- PHP_SELF to update the current page  -->
-            <!-- If POST data exist for input use that as value  -->
-            <!-- Username Form -->
-            <p>
-                <label for="login-username" class="loginform">Brugernavn: </label>
-                <input type="text" name="login-username" placeholder="Brugernavn" class="logininput" value="<?php echo isset($_POST['login-username']) ? $_POST['login-username'] : '';?>">
-                <label for="login-username" class="loginerror"><?php echo $usernameError;?></label>
+            <h1>Velkommen til, <?php echo $_SESSION['newuser-username']?>. Du kan logge ind her</h1>
 
-            </p>
-            <!-- Password Form -->
-            <p>
-                <label for="login-password" class="loginform">Adgangskode: </label>
-                <input type="password" name="login-password" placeholder="Adgangskode" class="logininput" value="<?php echo isset($_POST['login-password']) ? $_POST['login-password'] : '';?>">
-                <label for="login-password" class="loginerror"><?php echo $passwordEmpty;?></label>
+            <!-- TODO Include for login form / php ??-->
 
-            </p>
-            
-            <p>
-                <input type="submit" name="login-submit" value="Login" class="submitbtn loginbtn">
-            </p>
-        </form>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">  <!-- PHP_SELF to update the current page  -->
+                <!-- If POST data exist for input use that as value  -->
+                <!-- Username Form -->
+                <p>
+                    <label for="login-username" class="loginform">Brugernavn: </label>
+                    <input type="text" name="login-username" placeholder="Brugernavn" class="logininput" value="<?php echo isset($_POST['login-username']) ? $_POST['login-username'] : '';?>">
+                    <label for="login-username" class="loginerror"><?php echo $usernameError;?></label>
+
+                </p>
+                <!-- Password Form -->
+                <p>
+                    <label for="login-password" class="loginform">Adgangskode: </label>
+                    <input type="password" name="login-password" placeholder="Adgangskode" class="logininput" value="<?php echo isset($_POST['login-password']) ? $_POST['login-password'] : '';?>">
+                    <label for="login-password" class="loginerror"><?php echo $passwordEmpty;?></label>
+
+                </p>
+                
+                <p>
+                    <input type="submit" name="login-submit" value="Login" class="submitbtn loginbtn">
+                </p>
+            </form>
         </main>
 
         <?php include "includes/footer.php"; ?>
