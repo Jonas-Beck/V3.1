@@ -13,7 +13,7 @@
     <p>
         <label for="login-password" class="loginform">Adgangskode: </label>
         <input type="password" name="login-password" placeholder="Adgangskode" class="logininput" value="<?php echo isset($_POST['login-password']) ? $_POST['login-password'] : '';?>">
-        <label for="login-password" class="loginerror"><?php echo $passwordEmpty;?></label>
+        <label for="login-password" class="loginerror"><?php echo $passwordError;?></label>
 
     </p>
     <!-- Submit Form -->

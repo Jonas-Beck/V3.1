@@ -5,27 +5,60 @@
     $passwordError = $postcodeError = $phoneError = "";
     $formValidate = true;
     if ($_SERVER["REQUEST_METHOD"] == "POST") {  // TODO More validation
+
+        // Use test input on all POST Array items
+        foreach($_POST as $key => $value){
+            $_POST[$key] = test_input($value);
+        }
+
+    
         // Check if both passwords arent the same
-        if ( test_input($_POST["newuser-passwordrepeat"]) !== test_input($_POST["newuser-password"])){
+        if ( $_POST["newuser-passwordrepeat"] !== $_POST["newuser-password"]){
             $passwordError = "Adgangskoden er ikke ens"; // Show error message
             $formValidate = false;
         }
         // Check if country == Danmark
-        if ( strtolower(test_input($_POST["newuser-country"])) == "danmark"){
+        if ( strtolower($_POST["newuser-country"]) == "danmark"){
             // Check if postcode is 4 char
-            if (strlen(test_input($_POST["newuser-postcode"])) !== 4) {
+            if (strlen($_POST["newuser-postcode"]) !== 4) {
                 $postcodeError = "Postnummer skal være  4 cifre"; // Show error message
                 $formValidate = false;
             }
             // Check if phonenumber is 8 char
-            if (strlen(test_input($_POST["newuser-phone"])) !== 8) {
+            if (strlen($_POST["newuser-phone"]) !== 8) {
                 $phoneError = "Telefonnummer skal være 8 cifre"; // Show error message
                 $formValidate = false;
             }
         }
+
+        // TODO Change to class for connection
+        if ($formValidate){
+
+            // Create connection
+            $connection = new mysqli("localhost", "jona63m2_jona63m2", "cvcv090701", "jona63m2_EDEA_db");
+
+            // Check connection
+            if ($connection->connect_error) {
+                // TODO Display connection error message
+                $formValidate = false;
+            } 
+            else{
+                $result = $connection->query("SELECT * FROM users WHERE Username = '{$_POST["newuser-username"]}'");
+                $row = $result->fetch_assoc();
+                if($row == null){ // TODO use test_input and all data from forms
+                    $connection->query("INSERT INTO `users` (`ID`, `Username`, `Password`, `Firstname`, `Lastname`, `Address`, `Postcode`, `Country`, `Email`, `Website`) 
+                                        VALUES (NULL, '{$_POST["newuser-username"]}', '{$_POST["newuser-password"]}', '{$_POST["newuser-firstname"]}', '{$_POST["newuser-lastname"]}', '{$_POST["newuser-address"]}', '{$_POST["newuser-postcode"]}', '{$_POST["newuser-country"]}', '{$_POST["newuser-email"]}', '{$_POST["newuser-website"]}') ");
+                }
+                else{ 
+                    // TODO Error message if username exist already
+                    $formValidate == null;
+                }
+            }
+        }
+
         // Check if form is validated 
         if ($formValidate) {
-            $_SESSION['newuser-username'] = htmlspecialchars($_POST["newuser-username"]);
+            $_SESSION['newuser-username'] = $_POST["newuser-username"];
             header("Location: createuser-landing.php");
             exit();
         }
@@ -66,55 +99,54 @@
             <!-- If POST data exist for input use that as value  -->
             <p>
                 <label for="newuser-username">Brugernavn: </label>
-                <input type="text" name="newuser-username" placeholder="Brugernavn" class="logininput" value="<?php echo isset($_POST['newuser-username']) ? test_input($_POST['newuser-username']) : ''; ?>">
+                <input type="text" name="newuser-username" placeholder="Brugernavn" class="logininput" value="<?php echo isset($_POST['newuser-username']) ? $_POST['newuser-username'] : ''; ?>">
             </p>
             <p>
                 <label for="newuser-password">Adgangskode: </label>
-                <input type="password" name="newuser-password" placeholder="Adgangskode" class="logininput" value="<?php echo isset($_POST['newuser-password']) ? test_input($_POST['newuser-password']) : ''; ?>">
+                <input type="password" name="newuser-password" placeholder="Adgangskode" class="logininput" >
                 <label for="newuser-password" class="loginerror"><?php echo $passwordError?></label>
             </p>
             <p>
                 <label for="newuser-passwordrepeat">Gentag adgangskode: </label>
-                <input type="password" name="newuser-passwordrepeat" placeholder="Gentag adgangskode" class="logininput" value="<?php echo isset($_POST['newuser-passwordrepeat']) ? test_input($_POST['newuser-passwordrepeat']) : ''; ?>">
+                <input type="password" name="newuser-passwordrepeat" placeholder="Gentag adgangskode" class="logininput">
                 <label for="newuser-passwordrepeat" class="loginerror"><?php echo $passwordError?></label>
-
             </p>
             <p>
                 <label for="newuser-firstname">Fornavn: </label>
-                <input type="text" name="newuser-firstname" placeholder="Fornavn" class="logininput" value="<?php echo isset($_POST['newuser-firstname']) ? test_input($_POST['newuser-firstname']) : ''; ?>">
+                <input type="text" name="newuser-firstname" placeholder="Fornavn" class="logininput" value="<?php echo isset($_POST['newuser-firstname']) ? $_POST['newuser-firstname'] : ''; ?>">
             </p>
             <p>
                 <label for="newuser-lastname">Efternavn: </label>
-                <input type="text" name="newuser-lastname" placeholder="Efternavn" class="logininput" value="<?php echo isset($_POST['newuser-lastname']) ? test_input($_POST['newuser-lastname']): ''; ?>">
+                <input type="text" name="newuser-lastname" placeholder="Efternavn" class="logininput" value="<?php echo isset($_POST['newuser-lastname']) ? $_POST['newuser-lastname']: ''; ?>">
             </p>
             <p>
                 <label for="newuser-address">Adresse: </label>
-                <input type="text" name="newuser-address" placeholder="Gade og nr." class="logininput" value="<?php echo isset($_POST['newuser-address']) ? test_input($_POST['newuser-address']) : ''; ?>">
+                <input type="text" name="newuser-address" placeholder="Gade og nr." class="logininput" value="<?php echo isset($_POST['newuser-address']) ? $_POST['newuser-address'] : ''; ?>">
             </p>
             <p>
                 <label for="newuser-postcode">Postnummer: </label>
-                <input type="number" name="newuser-postcode" placeholder="Postnummer" class="logininput" value="<?php echo isset($_POST['newuser-postcode']) ? test_input($_POST['newuser-postcode']) : ''; ?>">
+                <input type="number" name="newuser-postcode" placeholder="Postnummer" class="logininput" value="<?php echo isset($_POST['newuser-postcode']) ? $_POST['newuser-postcode'] : ''; ?>">
                 <label for="newuser-postcode" class="loginerror"><?php echo $postcodeError?></label>
             </p>
             <p>
                 <label for="newuser-city">By: </label>
-                <input type="text" name="newuser-city" placeholder="By" disabled class="logininput" value="<?php echo isset($_POST['newuser-city']) ? test_input($_POST['newuser-city']) : ''; ?>">
+                <input type="text" name="newuser-city" placeholder="By" disabled class="logininput" value="<?php echo isset($_POST['newuser-city']) ? $_POST['newuser-city'] : ''; ?>">
             </p>
             <p>
                 <label for="newuser-country">Land: </label>
-                <input type="text" name="newuser-country" placeholder="Land" class="logininput" value="<?php echo isset($_POST['newuser-country']) ? test_input($_POST['newuser-country']) : ''; ?>">
+                <input type="text" name="newuser-country" placeholder="Land" class="logininput" value="<?php echo isset($_POST['newuser-country']) ? $_POST['newuser-country'] : ''; ?>">
             </p>
             <p>
                 <label for="newuser-email">E-mail: </label>
-                <input type="email" name="newuser-email" placeholder="E-mail adresse" class="logininput" value="<?php echo isset($_POST['newuser-email']) ? test_input($_POST['newuser-email']) : ''; ?>">
+                <input type="email" name="newuser-email" placeholder="E-mail adresse" class="logininput" value="<?php echo isset($_POST['newuser-email']) ? $_POST['newuser-email'] : ''; ?>">
             </p>
             <p>
                 <label for="newuser-website">Website: </label>
-                <input type="text" name="newuser-website" placeholder="Indtast URL på din hjemmeside" class="logininput" value="<?php echo isset($_POST['newuser-website']) ? test_input($_POST['newuser-website']) : ''; ?>">
+                <input type="text" name="newuser-website" placeholder="Indtast URL på din hjemmeside" class="logininput" value="<?php echo isset($_POST['newuser-website']) ? $_POST['newuser-website'] : ''; ?>">
             </p>
             <p>
                 <label for="newuser-phone">Telefonnummer: </label>
-                <input type="number" name="newuser-phone" placeholder="Telefonnummer" class="logininput" value="<?php echo isset($_POST['newuser-phone']) ? test_input($_POST['newuser-phone']) : ''; ?>">
+                <input type="number" name="newuser-phone" placeholder="Telefonnummer" class="logininput" value="<?php echo isset($_POST['newuser-phone']) ? $_POST['newuser-phone'] : ''; ?>">
                 <label for="newuser-phone" class="loginerror"><?php echo $phoneError?></label>
             </p>
             <p>

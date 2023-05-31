@@ -4,7 +4,7 @@
     // Used with login-form.php include 
 
     // Error Variables
-    $passwordEmpty = $usernameError = "";
+    $passwordError = $usernameError = "";
     $formValidate = true;
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -20,9 +20,30 @@
         }
         // Check password isnt empty
         if (empty($_POST["login-password"])){
-            $passwordEmpty = "Du har ikke indtastet en adgangskode"; // Show error message
+            $passwordError = "Du har ikke indtastet en adgangskode"; // Show error message
             $formValidate = false;
         }
+        // TODO Change to class for connection
+        if ($formValidate){
+
+            // Create connection
+            $connection = new mysqli("localhost", "jona63m2_jona63m2", "cvcv090701", "jona63m2_EDEA_db");
+
+            // Check connection
+            if ($connection->connect_error) {
+                // TODO Display connection error message
+                $formValidate = false;
+            } 
+            else{
+                $result = $connection->query("SELECT * FROM users WHERE Username = '{$_POST["login-username"]}'");
+                $row = $result->fetch_assoc();
+                if($row["Password"] != $_POST["login-password"]){
+                    $passwordError = "Du har indtastet en forkert adgangskode!";
+                    $formValidate = false;
+                }
+            }
+        }
+
         // Check if form is validatet if true save POST data to session and redirect to login-landing.php
         if ($formValidate) {
             $_SESSION['logged_in'] = true;
