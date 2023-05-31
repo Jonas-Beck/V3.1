@@ -1,5 +1,12 @@
 <?php 
 session_start();
+
+//Redirect if user isnt logged in
+if ($_SESSION['logged_in'] !== true){ 
+    header("Location: login.php");
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>

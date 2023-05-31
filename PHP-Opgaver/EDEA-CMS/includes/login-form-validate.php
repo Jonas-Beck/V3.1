@@ -31,6 +31,7 @@
 
             // Check connection
             if ($connection->connect_error) {
+                echo "<script>alert('Connection Error');</script>"; // TEMP Error message
                 // TODO Display connection error message
                 $formValidate = false;
             } 
@@ -48,7 +49,6 @@
         if ($formValidate) {
             $_SESSION['logged_in'] = true;
             $_SESSION['username'] = htmlspecialchars($_POST['login-username']);
-            $_SESSION['password'] = htmlspecialchars($_POST['login-password']);
             header("Location: login-landing.php");
             exit();
         }

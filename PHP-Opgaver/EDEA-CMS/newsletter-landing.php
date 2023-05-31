@@ -11,12 +11,7 @@ session_start();
     <title>Edea skates</title>
 </head>
 <!-- Opgave 4 -->
-<body class="<?php if (date("i") % 2 == 0) {
-                    echo "light";
-                }
-                else {
-                    echo "dark";
-                } ?>">
+<body>
     <?php 
         include "includes/topmenu.php";
 

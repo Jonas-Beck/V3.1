@@ -2,7 +2,7 @@
     session_start();
 
     //  Error variables
-    $passwordError = $postcodeError = $phoneError = "";
+    $passwordError = $postcodeError = $phoneError = $usernameError = "";
     $formValidate = true;
     if ($_SERVER["REQUEST_METHOD"] == "POST") {  // TODO More validation
 
@@ -39,19 +39,20 @@
 
             // Check connection
             if ($connection->connect_error) {
+                echo "<script>alert('Connection Error');</script>"; // TEMP Error message
                 // TODO Display connection error message
                 $formValidate = false;
             } 
             else{
                 $result = $connection->query("SELECT * FROM users WHERE Username = '{$_POST["newuser-username"]}'");
                 $row = $result->fetch_assoc();
-                if($row == null){ // TODO use test_input and all data from forms
-                    $connection->query("INSERT INTO `users` (`ID`, `Username`, `Password`, `Firstname`, `Lastname`, `Address`, `Postcode`, `Country`, `Email`, `Website`) 
+                if($row == null){
+                    $connection->query("INSERT INTO `users` (`ID`, `Username`, `Password`, `Firstname`, `Lastname`, `Address`, `Postcode`,      `Country`, `Email`, `Website`) 
                                         VALUES (NULL, '{$_POST["newuser-username"]}', '{$_POST["newuser-password"]}', '{$_POST["newuser-firstname"]}', '{$_POST["newuser-lastname"]}', '{$_POST["newuser-address"]}', '{$_POST["newuser-postcode"]}', '{$_POST["newuser-country"]}', '{$_POST["newuser-email"]}', '{$_POST["newuser-website"]}') ");
                 }
                 else{ 
-                    // TODO Error message if username exist already
-                    $formValidate == null;
+                    $usernameError = "Brugernavnet er allerede brugt.";
+                    $formValidate = false;
                 }
             }
         }
@@ -100,6 +101,7 @@
             <p>
                 <label for="newuser-username">Brugernavn: </label>
                 <input type="text" name="newuser-username" placeholder="Brugernavn" class="logininput" value="<?php echo isset($_POST['newuser-username']) ? $_POST['newuser-username'] : ''; ?>">
+                <label for="newuser-username" class="loginerror"><?php echo $usernameError?></label>
             </p>
             <p>
                 <label for="newuser-password">Adgangskode: </label>

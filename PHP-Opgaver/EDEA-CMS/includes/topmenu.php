@@ -9,7 +9,7 @@
             echo <<<HTML
                 <li><a href='#'>Logget ind som: {$_SESSION['username']}</a></li>
                 <li><a href='logout.php'>Logout</a></li>
-                <li><a href='#'>Min Side</a></li>
+                <li><a href='mypage.php'>Min Side</a></li>
             HTML;
         }
         else{   // TODO Best way ??
