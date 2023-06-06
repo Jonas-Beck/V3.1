@@ -27,6 +27,10 @@ $font-heading: "Ubuntu", Helvetica, Arial, Sans-serif;
     padding: 0;
 }
 
+.d-none {
+    display: none;
+}
+
 body {
     display: flex;
     flex-direction: column;

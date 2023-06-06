@@ -1,4 +1,5 @@
 <?php 
+    require_once("database.php");
     // Always place this at the top of the php document due to header() redirect
 
     // Used with login-form.php include 
@@ -8,6 +9,10 @@
     $formValidate = true;
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+        // Test all POST values
+        include "test_input.php";
+
         // Check username isnt empty
         if (empty($_POST["login-username"])){
             $usernameError = "Du har ikke indtastet et brugernavn"; // Show error message
@@ -23,32 +28,30 @@
             $passwordError = "Du har ikke indtastet en adgangskode"; // Show error message
             $formValidate = false;
         }
-        // TODO Change to class for connection
+       
         if ($formValidate){
-
             // Create connection
-            $connection = new mysqli("localhost", "jona63m2_jona63m2", "cvcv090701", "jona63m2_EDEA_db");
-
+            $connection = new database();
             // Check connection
-            if ($connection->connect_error) {
+            if ($connection->check_connection) {
+                $row = $connection->select("users", "Username = '{$_POST["login-username"]}'", "Username", "ASC", 1);
+                if($row[0]["Password"] != $_POST["login-password"]){
+                    $passwordError = "Du har indtastet et forkert adgangskode!";
+                    $formValidate = false;
+                }
+                
+            } 
+            else{
                 echo "<script>alert('Connection Error');</script>"; // TEMP Error message
                 // TODO Display connection error message
                 $formValidate = false;
-            } 
-            else{
-                $result = $connection->query("SELECT * FROM users WHERE Username = '{$_POST["login-username"]}'");
-                $row = $result->fetch_assoc();
-                if($row["Password"] != $_POST["login-password"]){
-                    $passwordError = "Du har indtastet en forkert adgangskode!";
-                    $formValidate = false;
-                }
             }
         }
 
         // Check if form is validatet if true save POST data to session and redirect to login-landing.php
         if ($formValidate) {
             $_SESSION['logged_in'] = true;
-            $_SESSION['username'] = htmlspecialchars($_POST['login-username']);
+            $_SESSION['username'] = $_POST['login-username'];
             header("Location: login-landing.php");
             exit();
         }

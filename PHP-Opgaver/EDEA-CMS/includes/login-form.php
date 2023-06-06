@@ -7,7 +7,6 @@
         <label for="login-username" class="loginform">Brugernavn: </label>
         <input type="text" name="login-username" placeholder="Brugernavn" class="logininput" value="<?php echo isset($_POST['login-username']) ? $_POST['login-username'] : '';?>">
         <label for="login-username" class="loginerror"><?php echo $usernameError;?></label>
-
     </p>
     <!-- Password Form -->
     <p>

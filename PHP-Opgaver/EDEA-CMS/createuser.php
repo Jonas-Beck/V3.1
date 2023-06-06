@@ -1,17 +1,15 @@
 <?php
     session_start();
+    require_once("database.php");
 
     //  Error variables
     $passwordError = $postcodeError = $phoneError = $usernameError = "";
     $formValidate = true;
     if ($_SERVER["REQUEST_METHOD"] == "POST") {  // TODO More validation
 
-        // Use test input on all POST Array items
-        foreach($_POST as $key => $value){
-            $_POST[$key] = test_input($value);
-        }
+        // Test all POST array values 
+        include "test_input.php";
 
-    
         // Check if both passwords arent the same
         if ( $_POST["newuser-passwordrepeat"] !== $_POST["newuser-password"]){
             $passwordError = "Adgangskoden er ikke ens"; // Show error message
@@ -57,6 +55,40 @@
             }
         }
 
+        if (false){ // WIP DATABASE VERSION
+
+            // Create connection
+            $connection = new database();
+
+            // Check connection
+            if ($connection->check_connection) {
+                $row = $connection->select("users", "Username = '{$_POST["newuser-username"]}'");
+                $values = [
+                    "Username" => $_POST["newuser-username"],
+                    "Password" => $_POST["newuser-password"],
+                    "Firstname" => $_POST["newuser-firstname"],
+                    "Lastname" => $_POST["newuser-lastname"],
+                    "Address" => $_POST["newuser-address"],
+                    "Postcode" => $_POST["newuser-postcode"],
+                    "Country" => $_POST["newuser-country"],
+                    "Email" => $_POST["newuser-email"],
+                    "Website" => $_POST["newuser-website"]
+                ];
+                if($row == null){ // <- This works
+                    $connection->insert("users", $values); // <- This dosent
+                }
+                else{ 
+                    $usernameError = "Brugernavnet er allerede brugt.";
+                    $formValidate = false;
+                }
+            } 
+            else{
+                echo "<script>alert('Connection Error');</script>"; // TEMP Error message
+                // TODO Display connection error message
+                $formValidate = false;
+            }
+        }
+
         // Check if form is validated 
         if ($formValidate) {
             $_SESSION['newuser-username'] = $_POST["newuser-username"];
@@ -65,13 +97,7 @@
         }
     }
 
-    // Function to test input for security 
-    function test_input($data) {
-        $data = trim($data);    //TODO Placement
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
+    
 ?>
 
 
