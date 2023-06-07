@@ -12,6 +12,7 @@
         else{ // TODO Best way ??
             ?>
                 <li><a href='logout.php'>logout</a></li>
+                <li><a href="createproduct.php">Opret Product</a></li>
             <?php
         }
         ?>

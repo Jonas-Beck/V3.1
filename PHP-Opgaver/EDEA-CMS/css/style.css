@@ -8,6 +8,10 @@
   display: none;
 }
 
+.fileupload {
+  padding: 5px 0px;
+}
+
 body {
   display: flex;
   flex-direction: column;

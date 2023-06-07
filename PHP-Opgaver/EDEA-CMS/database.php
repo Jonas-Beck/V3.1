@@ -65,20 +65,18 @@ class database
     // Table = Table name to insert into
     // Array = Associate array with columnname as key and value as value
     public function insert($table, $array){
-        $values = $columns = "";
-        foreach ($array as $columns => $value) {
+        $values = "";
+        foreach ($array as $value) {
             // Check if value is that last in array
             // If true dont add ","
             if($value === end($array)){ 
-                $columns .= "'$columns'";
                 $values .= "'$value'";
             } else{
-                $columns .= "'$columns',";
-                $values .= "'$value',";
+                $values .= "'$value', ";
             }
         }
-        echo "INSERT INTO $table ($columns) VALUES ($values)"; // <- This dosent work
-        $this->query_execute("INSERT INTO $table ($columns) VALUES ($values)");
+        echo "INSERT INTO $table VALUES ($values)"; // <- This dosent work
+        $this->query_execute("INSERT INTO $table VALUES ($values)");
     }
 }
 

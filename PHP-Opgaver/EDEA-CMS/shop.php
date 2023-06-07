@@ -34,7 +34,7 @@ require_once("database.php");
                         if ($connection->check_connection) {
                             // Get all rows from SQLQuery 
                             // $products = $connection->get_rows("SELECT * FROM products ORDER BY PID DESC LIMIT 3");
-                            $products = $connection->select("products", "", "PID");
+                            $products = $connection->select("products", "", "PID", "DESC");
                             
                             // Loop through all products
                             foreach ($products as $product) {

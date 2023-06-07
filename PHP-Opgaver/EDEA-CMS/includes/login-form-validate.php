@@ -11,7 +11,7 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Test all POST values
-        include "test_input.php";
+        include "includes/test_input.php";
 
         // Check username isnt empty
         if (empty($_POST["login-username"])){

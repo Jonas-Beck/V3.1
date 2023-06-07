@@ -8,7 +8,7 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {  // TODO More validation
 
         // Test all POST array values 
-        include "test_input.php";
+        include "includes/test_input.php";
 
         // Check if both passwords arent the same
         if ( $_POST["newuser-passwordrepeat"] !== $_POST["newuser-password"]){

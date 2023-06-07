@@ -75,7 +75,7 @@ if ($connection->check_connection) {
                     <p><span>Støvle stivhed: </span><?php echo $product['PStiff']?></p>
                     <p><span>Understøtter: </span><?php echo $product['PSupp']?></p>
                     <p><span>Pris: </span><?php echo $product['PPrice']?>,-</p>
-                    <p><span>På lager: </span><?php echo $product['PDesc'] > 0 ? "Ja": "Nej"?></p>
+                    <p><span>På lager: </span><?php echo $product['PStock'] > 0 ? "Ja": "Nej"?></p>
                 </section>
             </div>
         </main>
