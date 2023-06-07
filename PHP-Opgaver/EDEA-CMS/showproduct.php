@@ -1,5 +1,37 @@
 <?php 
 session_start();
+
+require_once("database.php");
+
+ // Connect to DB
+$connection = new database();
+
+// Check connection
+if ($connection->check_connection) {
+    // Save product from database in $product
+    $product = $connection->select("products", "PID = '{$_GET['id']}'")[0];
+
+    // Turn product PPic into array 
+    $product['PPic'] = explode(" ", $product['PPic']);
+
+    // Array to store images
+    $productImage = [];
+    // Loop 3 times 
+    for ($i=0; $i < 3; $i++) { 
+        // Check if array is empty if true use default image
+        if ($product['PPic'][$i] == null) { 
+            $productImage[$i] = "imagecomingsoon.png";
+        }else{
+            // Use current image 
+            $productImage[$i] = $product['PPic'][$i];
+        }
+    }
+}else{
+    echo "<script>alert('Connection Error');</script>"; // TEMP Error message
+    // TODO Display connection error message
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -21,24 +53,29 @@ session_start();
     <div class="content">
 
         <main>
-            <h1>Edea Overture</h1>
+            <h1><?php echo $product['PName']?></h1>
             <div class="showProduct">
                 <section class="leftColumn">
-                    <div><div><img src="img/overture-edea-skates.jpg" alt="Overture Edea skates"></div>
-                    <div><img src="img/overture-black-edea-skates.jpg" alt="Overture Edea skates"><img src="img/overture-lingua-edea-skates.jpg" alt="Overture Edea skates"></div></div>
+                    <div>
+                        <div>
+                            <img src="img/<?php echo $productImage[0]?>" alt="Overture Edea skates">
+                        </div>
+                        <div>
+                            <img src="img/<?php echo $productImage[1]?>" alt="Overture Edea skates">
+                            <img src="img/<?php echo $productImage[2]?>" alt="Overture Edea skates">
+                        </div>
+                    </div>
                     <h2>Beskrivelse:</h2>
-                    <p>Overture er en kombination af let design og Edea teknologi. Det er den mest solgte Edea støvle. Støvlen har stor støtte og fleksibilitet for kunstskøjteløbere, der arbejder på deres grundløb, enkeltspring og axel.</p>
-                    <p>Overture er baseret på vores teknologisk viden om kunstskøjteløb på højt niveau og er baseret på vores passion for kunstskøjteløb.</p>
-                    <p>Edea Overture er 100% håndlavet italiensk design. Støvlen er letvægtsdesign, som sikrer god responsivitet. Den giver en god fornemmelse for isen, som gør det lettere at udvikle det grundlæggende skøjteløb.</p>
+                    <p><?php echo $product['PDesc']?></p>
                 </section>
 
                 <section class="rightColumn">
                     <a href="#">Køb nu!</a>
-                    <p><span>Antal stjerner: </span>3</p>
-                    <p><span>Støvle stivhed: </span>48</p>
-                    <p><span>Understøtter: </span>enkeltspring Axel</p>
-                    <p><span>Pris: </span>1175,-</p>
-                    <p><span>På lager: </span>Ja</p>
+                    <p><span>Antal stjerner: </span><?php echo $product['PStars']?></p>
+                    <p><span>Støvle stivhed: </span><?php echo $product['PStiff']?></p>
+                    <p><span>Understøtter: </span><?php echo $product['PSupp']?></p>
+                    <p><span>Pris: </span><?php echo $product['PPrice']?>,-</p>
+                    <p><span>På lager: </span><?php echo $product['PDesc'] > 0 ? "Ja": "Nej"?></p>
                 </section>
             </div>
         </main>
