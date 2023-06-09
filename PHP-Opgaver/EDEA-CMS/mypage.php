@@ -1,5 +1,7 @@
 <?php 
 session_start();
+require_once "database.php";
+
 
 //Redirect if user isnt logged in
 if ($_SESSION['logged_in'] !== true){ 
@@ -7,28 +9,48 @@ if ($_SESSION['logged_in'] !== true){
     exit();
 }
 
-// TODO Use the database class 
 $edit = "";
 
  // Create connection
-$connection = new mysqli("localhost", "jona63m2_jona63m2", "cvcv090701", "jona63m2_EDEA_db");
+$connection = new database();
 
 // Check connection
-if ($connection->connect_error) {
-    echo "<script>alert('Connection Error');</script>"; // TEMP Error message
-    // TODO Display connection error message
-} 
-else{
+if ($connection->check_connection) { 
+
+    $row = $connection->select("users","Username = '{$_SESSION['username']}'")[0];
+
+    // mypage-edit-accept button
+    if($_SERVER["REQUEST_METHOD"] == "POST" AND isset($_POST['mypage-edit-accept'])){
+
+        $values = [
+            "Firstname" => $_POST["mypage-firstname"],
+            "Lastname" => $_POST["mypage-lastname"],
+            "Address" => $_POST["mypage-address"],
+            "Postcode" => $_POST["mypage-postcode"],
+            "Country" => $_POST["mypage-country"],
+            "Email" => $_POST["mypage-email"],
+            "Website" => $_POST["mypage-website"]
+        ];
+        
+        $connection->update("users", $values, "Username = '{$_SESSION["username"]}'");
+        $edit = false;
+
+        $row = $connection->select("users","Username = '{$_SESSION['username']}'")[0];
+    }
+
     // mypage-deleteuser button 
     if($_SERVER["REQUEST_METHOD"] == "POST" AND isset($_POST['mypage-deleteuser'])){
         if($row != null){ 
-        $connection->query("DELETE FROM users WHERE Username = '{$_SESSION["username"]}'");
-        session_unset();
-        session_destroy();
-        header("Location: index.php");
-        exit();
+            if($connection->delete("users", "Username = '{$_SESSION["username"]}'")){
+                session_unset();
+                session_destroy();
+                header("Location: index.php");
+                exit();
+            } else{
+                // ERROR
+            }
         } else{ 
-            echo "<script>alert('{$_SESSION["username"]}');</script>";
+            // ERROR User dosent exist
         }
     }   
     // mypage-edit button
@@ -40,17 +62,10 @@ else{
         $edit = false;
     }
 
-    // mypage-edit-accept button
-    if($_SERVER["REQUEST_METHOD"] == "POST" AND isset($_POST['mypage-edit-accept'])){
-
-        include "test_input.php";
-        // Update db with new data
-        $connection->query("UPDATE users SET Firstname = '{$_POST['mypage-firstname']}', Lastname = '{$_POST['mypage-lastname']}', Address = '{$_POST['mypage-address']}', Postcode = '{$_POST['mypage-postcode']}', Country = '{$_POST['mypage-country']}', Email = '{$_POST['mypage-email']}', Website = '{$_POST['mypage-website']}' WHERE Username = '{$_SESSION["username"]}'");
-        $edit = false;
-    }
-
-    $result = $connection->query("SELECT * FROM users WHERE Username = '{$_SESSION["username"]}'");
-    $row = $result->fetch_assoc();
+} 
+else{
+    echo "<script>alert('Connection Error');</script>"; // TEMP Error message
+    // TODO Display connection error message
 
 }
 

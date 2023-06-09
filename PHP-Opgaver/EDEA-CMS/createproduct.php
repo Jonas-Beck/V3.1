@@ -53,26 +53,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         }
 
         // Check if upload image was succesful
-        if($uploadSucces){
+        if($uploadSucces){ // WIP
             
             // Create connection
-            $connection = new mysqli("localhost", "jona63m2_jona63m2", "cvcv090701", "jona63m2_EDEA_db");
+            $connection = new database();
 
             // Check connection
-            if ($connection->connect_error) {
-                echo "<script>alert('Connection Error');</script>"; // TEMP Error message
-                // TODO Display connection error message
-            } 
-            else{
-
+            if ($connection->check_connection) {
                 // Turn createproduct-supports into string for database
                 $productSupport = implode(" ", $_POST['createproduct-supports']);
 
-                // INSERT SQL
-                $connection->query("INSERT INTO `products` VALUES (NULL, '{$_POST['createproduct-name']}', '{$_POST['createproduct-stars']}', '{$_POST['createproduct-desc']}', '{$_POST['createproduct-stiff']}', '{$productSupport}', '{$_POST['createproduct-price']}', '{$imageString}', '{$_POST['createproduct-stock']}') ");
+                $values = [
+                    "PName" => $_POST['createproduct-name'],
+                    "PStars" => $_POST['createproduct-stars'],
+                    "PDesc" => $_POST['createproduct-desc'],
+                    "PStiff" => $_POST['createproduct-stiff'],
+                    "PSupp" => $productSupport,
+                    "PPrice" => $_POST['createproduct-price'],
+                    "PPic" => $imageString,
+                    "PStock" => $_POST['createproduct-stock']
+                ];
+
+                $connection->insert("products", $values);
+            } 
+            else{
+                echo "<script>alert('Connection Error');</script>"; // TEMP Error message
+                 // TODO Display connection error message    
             }
         }
-        
     }
 }
 

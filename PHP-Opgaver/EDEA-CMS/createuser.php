@@ -29,40 +29,16 @@
             }
         }
 
-        // TODO Change to class for connection
-        if ($formValidate){
-
-            // Create connection
-            $connection = new mysqli("localhost", "jona63m2_jona63m2", "cvcv090701", "jona63m2_EDEA_db");
-
-            // Check connection
-            if ($connection->connect_error) {
-                echo "<script>alert('Connection Error');</script>"; // TEMP Error message
-                // TODO Display connection error message
-                $formValidate = false;
-            } 
-            else{
-                $result = $connection->query("SELECT * FROM users WHERE Username = '{$_POST["newuser-username"]}'");
-                $row = $result->fetch_assoc();
-                if($row == null){
-                    $connection->query("INSERT INTO `users` (`ID`, `Username`, `Password`, `Firstname`, `Lastname`, `Address`, `Postcode`,      `Country`, `Email`, `Website`) 
-                                        VALUES (NULL, '{$_POST["newuser-username"]}', '{$_POST["newuser-password"]}', '{$_POST["newuser-firstname"]}', '{$_POST["newuser-lastname"]}', '{$_POST["newuser-address"]}', '{$_POST["newuser-postcode"]}', '{$_POST["newuser-country"]}', '{$_POST["newuser-email"]}', '{$_POST["newuser-website"]}') ");
-                }
-                else{ 
-                    $usernameError = "Brugernavnet er allerede brugt.";
-                    $formValidate = false;
-                }
-            }
-        }
-
-        if (false){ // WIP DATABASE VERSION
+        if ($formValidate){ 
 
             // Create connection
             $connection = new database();
 
             // Check connection
             if ($connection->check_connection) {
-                $row = $connection->select("users", "Username = '{$_POST["newuser-username"]}'");
+                $row = $connection->select("users", "Username = '{$_POST["newuser-username"]}'")[0];
+
+                // Array with all values for database
                 $values = [
                     "Username" => $_POST["newuser-username"],
                     "Password" => $_POST["newuser-password"],
@@ -74,10 +50,13 @@
                     "Email" => $_POST["newuser-email"],
                     "Website" => $_POST["newuser-website"]
                 ];
-                if($row == null){ // <- This works
-                    $connection->insert("users", $values); // <- This dosent
+
+                if($row == null){ // Make sure username isnt already used
+                    if (!$connection->insert("users", $values)) {
+                        $formValidate = false; 
+                    }
                 }
-                else{ 
+                else{  // Error if username is used
                     $usernameError = "Brugernavnet er allerede brugt.";
                     $formValidate = false;
                 }
